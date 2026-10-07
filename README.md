@@ -91,8 +91,11 @@ Parameter: dateto (POST)
 
 Backend confirmed: **MySQL ≥5.1 (MariaDB fork)**, Apache 2.4.58, PHP 8.0.30, Windows host.
 
-### Proof Screenshot
-![SQL Injection Confirmation - Report 1](Screenshot/1_report.png)
+### Proof Screenshot & Verification Log
+- Raw Execution Log: [`log`](log)
+- Screenshot:
+
+![SQL Injection Confirmation - Report 1](screenshot/1_report.png)
 
 ## Impact
 - **CVSS 3.1 estimate: 8.5 (High)** — `AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N` (requires low-privilege/librarian auth, but yields full admin credential disclosure → privilege escalation to admin).
